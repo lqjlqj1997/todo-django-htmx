@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        {% load static %}
+        <script src="{% static 'htmx.min.js' %}" defer></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="w-full flex justify-center">
+            <div class="w-1/2">
+                <div class="pt-8 pb-4">
+                    <form>
+                    <input
+                        id="new-task"
+                        name="task"
+                        type="text"
+                        required
+                        class="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                        placeholder="Task"
+                    />
+                    <button
+                        hx-post="/newTask/"
+                        hx-trigger="click"
+                        hx-target="#todoList"
+                        hx-swap="innerHTML"
+                        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        New Task
+                    </button>
+                </form>
+                </div>
+
+                <ul id="todoList" role="list" class="divide-y divide-gray-100">
+                    {% include "todoList.html" %} 
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

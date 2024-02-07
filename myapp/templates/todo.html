@@ -1,0 +1,36 @@
+<li id="task-{{i.id}}" class="w-full flex justify-between gap-x-2 py-2">
+    <div class="w-full flex justify-between items-center min-w-0 gap-x-4">
+        <p class="text-sm font-semibold leading-6 text-gray-900">
+            {{ i.name }}
+        </p>
+        {% if i.completed %}
+        <p class="truncate text-xs bg-green-400 px-2 rounded-full text-white leading-5 text-gray-500">
+            Completed   
+        </p>
+        {% else %}
+        <p class="truncate text-xs bg-blue-400 px-2 rounded-full text-white leading-5 text-gray-500">
+            New 
+        </p>
+        {% endif %}
+    </div>
+    <div class="flex gap-x-2">
+        <button
+            hx-post="/doneTask/{{i.id}}/"
+            hx-trigger="click"
+            hx-target="#task-{{i.id}}"
+            hx-swap="outerHTML"
+            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+            Done
+        </button>
+        <button
+            hx-post="/deleteTask/{{i.id}}/"
+            hx-trigger="click"
+            hx-target="#task-{{i.id}}"
+            hx-swap="outerHTML"
+            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+            Delete
+        </button>
+    </div>
+</li>
